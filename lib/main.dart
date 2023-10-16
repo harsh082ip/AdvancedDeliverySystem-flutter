@@ -1,4 +1,4 @@
-import 'package:advanced_delivery_system/views/landing_screen.dart';
+import 'package:advanced_delivery_system/views/screen/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Advanced Delivery System',
       home: LandingScreen(),
     );
