@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "748123779873",
+    "project_id": "advanceddeliverysystem",
+    "storage_bucket": "advanceddeliverysystem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748123779873:android:fbc5eaf8f226ee1c358460",
+        "android_client_info": {
+          "package_name": "com.harsh082ip.ads.advanced_delivery_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJvrWsquhJL8l3tFP25fOW_s05zMQjzP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

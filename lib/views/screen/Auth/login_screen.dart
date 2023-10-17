@@ -1,18 +1,16 @@
-import 'dart:developer';
-
-import 'package:advanced_delivery_system/views/screen/Auth/login_screen.dart';
+import 'package:advanced_delivery_system/views/screen/Auth/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Signup_Screen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   String role;
-  Signup_Screen({super.key, required this.role});
+  LoginScreen({super.key, required this.role});
 
   @override
-  State<Signup_Screen> createState() => _Signup_ScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _Signup_ScreenState extends State<Signup_Screen> {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +28,7 @@ class _Signup_ScreenState extends State<Signup_Screen> {
                   margin: const EdgeInsets.only(left: 15.0),
                   alignment: Alignment.topLeft,
                   child: const Text(
-                    'Create Account',
+                    'Login to your  Account',
                     style: TextStyle(fontSize: 30.0),
                   ),
                 ),
@@ -40,29 +38,6 @@ class _Signup_ScreenState extends State<Signup_Screen> {
                   child: const Text(
                     'Make your shopping life easier!',
                     style: TextStyle(fontSize: 18.0),
-                  ),
-                ),
-                Container(
-                  margin:
-                      const EdgeInsets.only(top: 30.0, left: 15.0, right: 15.0),
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    // controller: passwordController,
-                    decoration: const InputDecoration(
-                      labelText: 'Name',
-                      labelStyle:
-                          TextStyle(color: Color.fromARGB(255, 173, 109, 45)),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 173, 109,
-                                45)), // Change the border color here
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 173, 109,
-                                45)), // Change the border color here
-                      ),
-                    ),
                   ),
                 ),
                 Container(
@@ -119,9 +94,7 @@ class _Signup_ScreenState extends State<Signup_Screen> {
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
                           backgroundColor: Color.fromARGB(255, 173, 109, 45)),
-                      onPressed: () {
-                        log(widget.role);
-                      },
+                      onPressed: () {},
                       child: const Text(
                         'Sign Up',
                         style: TextStyle(fontSize: 35.0),
@@ -133,17 +106,17 @@ class _Signup_ScreenState extends State<Signup_Screen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Already have an account?',
+                        'Dont\'t have an account?',
                         style: TextStyle(fontSize: 18.0),
                       ),
                       TextButton(
                           onPressed: () {
-                            Get.offAll(() => LoginScreen(
+                            Get.offAll(() => Signup_Screen(
                                   role: widget.role,
                                 ));
                           },
                           child: const Text(
-                            'Login here',
+                            'Sign Up here',
                             style: TextStyle(
                                 fontSize: 18.0,
                                 color: Color.fromARGB(255, 173, 109, 45)),

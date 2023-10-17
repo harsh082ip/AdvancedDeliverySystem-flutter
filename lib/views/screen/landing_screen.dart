@@ -1,3 +1,4 @@
+import 'package:advanced_delivery_system/views/screen/Auth/login_screen.dart';
 import 'package:advanced_delivery_system/views/screen/Auth/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,7 +55,9 @@ class _LandingScreenState extends State<LandingScreen> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Get.to(Signup_Screen());
+                        Get.to(LoginScreen(
+                          role: 'admin',
+                        ));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(15.0),
@@ -79,25 +82,31 @@ class _LandingScreenState extends State<LandingScreen> {
                         ),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.all(10.0).copyWith(left: 0),
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                          color: Color.fromARGB(255, 197, 194, 194)),
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/images/costumer.png',
-                            height: 150,
-                            width: 150,
-                          ),
-                          const Text(
-                            'Costumer',
-                            style:
-                                TextStyle(fontSize: 30.0, color: Colors.black),
-                          )
-                        ],
+                    InkWell(
+                      onTap: () {
+                        Get.to(LoginScreen(role: 'costumer'));
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(10.0).copyWith(left: 0),
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0)),
+                            color: Color.fromARGB(255, 197, 194, 194)),
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/images/costumer.png',
+                              height: 150,
+                              width: 150,
+                            ),
+                            const Text(
+                              'Costumer',
+                              style: TextStyle(
+                                  fontSize: 30.0, color: Colors.black),
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],
