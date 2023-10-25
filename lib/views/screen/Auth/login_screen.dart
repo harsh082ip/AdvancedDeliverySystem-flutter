@@ -11,6 +11,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final finalPhoneNo = '+91';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           backgroundColor: Color.fromARGB(255, 173, 109, 45)),
                       onPressed: () {},
                       child: const Text(
-                        'Sign Up',
+                        'Login',
                         style: TextStyle(fontSize: 35.0),
                       )),
                 ),

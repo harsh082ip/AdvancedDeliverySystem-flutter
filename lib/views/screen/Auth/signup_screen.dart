@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:advanced_delivery_system/controllers/firebase_auth.dart';
 import 'package:advanced_delivery_system/views/screen/Auth/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +15,23 @@ class Signup_Screen extends StatefulWidget {
 }
 
 class _Signup_ScreenState extends State<Signup_Screen> {
+  String finalPhoneNo = '+91';
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    clearCurrentUsers();
+  }
+
+  clearCurrentUsers() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +65,7 @@ class _Signup_ScreenState extends State<Signup_Screen> {
                   margin:
                       const EdgeInsets.only(top: 30.0, left: 15.0, right: 15.0),
                   child: TextFormField(
+                    controller: nameController,
                     keyboardType: TextInputType.text,
                     // controller: passwordController,
                     decoration: const InputDecoration(
@@ -69,6 +89,7 @@ class _Signup_ScreenState extends State<Signup_Screen> {
                   margin:
                       const EdgeInsets.only(top: 22.0, left: 15.0, right: 15.0),
                   child: TextFormField(
+                    controller: phoneController,
                     keyboardType: TextInputType.phone,
                     // controller: passwordController,
                     decoration: const InputDecoration(
@@ -92,6 +113,7 @@ class _Signup_ScreenState extends State<Signup_Screen> {
                   margin:
                       const EdgeInsets.only(top: 22.0, left: 15.0, right: 15.0),
                   child: TextFormField(
+                    controller: passwordController,
                     keyboardType: TextInputType.visiblePassword,
                     // controller: passwordController,
                     decoration: const InputDecoration(
@@ -120,6 +142,33 @@ class _Signup_ScreenState extends State<Signup_Screen> {
                           shape: const StadiumBorder(),
                           backgroundColor: Color.fromARGB(255, 173, 109, 45)),
                       onPressed: () {
+                        log('here');
+                        log(phoneController.text);
+                        if (phoneController.text.isNotEmpty) {
+                          // finalPhoneNo = finalPhoneNo +
+                          //     " " +
+                          //     phoneController.text.substring(0, 4) +
+                          //     "-" +
+                          //     phoneController.text.substring(4, 10);
+
+                          log(finalPhoneNo);
+
+                          Get.defaultDialog(
+                              content: Center(
+                            child: CircularProgressIndicator(
+                              color: Color.fromARGB(255, 173, 109, 45),
+                            ),
+                          ));
+                          // phoneController.clear();
+                          Auth.instance.signUp(
+                              nameController.text,
+                              passwordController.text,
+                              widget.role,
+                              phoneController.text,
+                              context,
+                              isLoading);
+                        }
+                        finalPhoneNo = "+91";
                         log(widget.role);
                       },
                       child: const Text(
