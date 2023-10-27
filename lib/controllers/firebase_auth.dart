@@ -32,7 +32,9 @@ class Auth extends GetxController {
               verificationCompleted: (PhoneAuthCredential credential) {
                 FirebaseAuth.instance
                     .signInWithCredential(credential)
-                    .then((value) => Get.offAll(CostumerHome()));
+                    .then((value) => Get.offAll(CostumerHome(
+                          currentuser: FirebaseAuth.instance.currentUser!.uid,
+                        )));
               },
               timeout: Duration(seconds: 120),
               verificationFailed: (FirebaseAuthException e) {
@@ -79,6 +81,7 @@ class Auth extends GetxController {
         }
       } else {
         Get.snackbar('User already exists', 'Please Login');
+        Navigator.pop(context);
       }
     });
   }
@@ -115,12 +118,16 @@ class Auth extends GetxController {
             .set(user.toJson())
             .then((value) {
           log('SignIn Success');
-          Get.offAll(CostumerHome());
+          Get.offAll(CostumerHome(
+            currentuser: FirebaseAuth.instance.currentUser!.uid,
+          ));
           log(userCredential.user!.uid + "yoyooyo");
         });
 
         log('SignIn Success');
-        Get.offAll(CostumerHome());
+        Get.offAll(CostumerHome(
+          currentuser: FirebaseAuth.instance.currentUser!.uid,
+        ));
         log(userCredential.user!.uid + "yoyooyo");
       } else {
         Get.defaultDialog(
@@ -137,6 +144,41 @@ class Auth extends GetxController {
       log('Error during sign-in: $e');
       Get.snackbar('Error',
           e.toString()); // Handle any errors that occur during the sign-in process.
+    }
+  }
+
+  void login(String phone_no, String password, String role,
+      BuildContext context) async {
+    Get.defaultDialog(
+        title: 'Please Wait...',
+        content: const Center(
+          child: CircularProgressIndicator(
+            color: Color.fromARGB(255, 173, 109, 45),
+          ),
+        ));
+    if (phone_no.isNotEmpty && password.isNotEmpty && role.isNotEmpty) {
+      CollectionReference reference =
+          await FirebaseFirestore.instance.collection('users');
+      QuerySnapshot snapshot = await reference
+          .where('phone_no', isEqualTo: phone_no)
+          .where('password', isEqualTo: password)
+          .where('role', isEqualTo: role)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        final item = snapshot.docs[0].data() as Map<String, dynamic>;
+        Get.offAll(CostumerHome(
+          currentuser: item['uid'],
+        ));
+      } else {
+        Navigator.pop(context);
+        log('User dosent exists');
+        Get.snackbar('Wrong Credentials', 'please verify');
+      }
+    } else {
+      log('Missing details');
+      Get.snackbar('Details Missing', '');
+      Navigator.pop(context);
     }
   }
 }

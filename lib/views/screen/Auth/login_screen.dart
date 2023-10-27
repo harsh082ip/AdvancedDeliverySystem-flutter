@@ -1,4 +1,8 @@
+import 'dart:developer';
+
+import 'package:advanced_delivery_system/controllers/firebase_auth.dart';
 import 'package:advanced_delivery_system/views/screen/Auth/signup_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +15,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController phone = TextEditingController();
+  final TextEditingController password = TextEditingController();
   final finalPhoneNo = '+91';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    clearCurrentUsers();
+  }
+
+  clearCurrentUsers() async {
+    await FirebaseAuth.instance.signOut();
+    log('no current users');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const EdgeInsets.only(top: 22.0, left: 15.0, right: 15.0),
                   child: TextFormField(
                     keyboardType: TextInputType.phone,
-                    // controller: passwordController,
+                    controller: phone,
                     decoration: const InputDecoration(
                       labelText: 'Phone No.',
                       labelStyle:
@@ -69,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const EdgeInsets.only(top: 22.0, left: 15.0, right: 15.0),
                   child: TextFormField(
                     keyboardType: TextInputType.visiblePassword,
-                    // controller: passwordController,
+                    controller: password,
                     decoration: const InputDecoration(
                       labelText: 'Password',
                       labelStyle:
@@ -95,7 +114,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
                           backgroundColor: Color.fromARGB(255, 173, 109, 45)),
-                      onPressed: () {},
+                      onPressed: () {
+                        Auth.instance.login(
+                            phone.text, password.text, widget.role, context);
+                      },
                       child: const Text(
                         'Login',
                         style: TextStyle(fontSize: 35.0),

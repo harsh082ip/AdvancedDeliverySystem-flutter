@@ -154,11 +154,12 @@ class _Signup_ScreenState extends State<Signup_Screen> {
                           log(finalPhoneNo);
 
                           Get.defaultDialog(
-                              content: Center(
-                            child: CircularProgressIndicator(
-                              color: Color.fromARGB(255, 173, 109, 45),
-                            ),
-                          ));
+                              title: 'Please Wait...',
+                              content: const Center(
+                                child: CircularProgressIndicator(
+                                  color: Color.fromARGB(255, 173, 109, 45),
+                                ),
+                              ));
                           // phoneController.clear();
                           Auth.instance.signUp(
                               nameController.text,
