@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:advanced_delivery_system/models/users.dart';
 import 'package:advanced_delivery_system/views/screen/Auth/otp_page.dart';
-import 'package:advanced_delivery_system/views/screen/costumer/costumer_home.dart';
+import 'package:advanced_delivery_system/views/screen/seller/seller_home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -166,6 +166,7 @@ class Auth extends GetxController {
           .get();
 
       if (snapshot.docs.isNotEmpty) {
+        log('docs not empty');
         final item = snapshot.docs[0].data() as Map<String, dynamic>;
         Get.offAll(CostumerHome(
           currentuser: item['uid'],

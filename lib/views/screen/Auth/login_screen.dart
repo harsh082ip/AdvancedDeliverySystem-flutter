@@ -113,7 +113,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
-                          backgroundColor: Color.fromARGB(255, 173, 109, 45)),
+                          backgroundColor:
+                              const Color.fromARGB(255, 173, 109, 45)),
                       onPressed: () {
                         Auth.instance.login(
                             phone.text, password.text, widget.role, context);

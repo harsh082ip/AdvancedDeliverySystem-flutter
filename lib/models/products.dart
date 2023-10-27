@@ -1,26 +1,26 @@
 class Products {
-  String name;
+  String prod_name;
   String desc;
   String price;
   String imgUrl;
-  String costumer_uid;
+  String seller_uid;
   String product_id;
 
   Products(
-      {required this.name,
+      {required this.prod_name,
       required this.desc,
       required this.price,
       required this.imgUrl,
-      required this.costumer_uid,
+      required this.seller_uid,
       required this.product_id});
 
   Map<String, dynamic> toJson() {
     return {
-      'name of product': name,
+      'name of product': prod_name,
       'description': desc,
       'price': price,
       'image Url': imgUrl,
-      'costumer id': costumer_uid,
+      'seller id': seller_uid,
       'product id': product_id,
     };
   }

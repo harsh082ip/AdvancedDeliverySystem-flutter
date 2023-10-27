@@ -56,7 +56,7 @@ class _LandingScreenState extends State<LandingScreen> {
                     InkWell(
                       onTap: () {
                         Get.to(LoginScreen(
-                          role: 'admin',
+                          role: 'seller',
                         ));
                       },
                       child: Container(
@@ -74,7 +74,7 @@ class _LandingScreenState extends State<LandingScreen> {
                               width: 150,
                             ),
                             const Text(
-                              'Admin',
+                              'seller',
                               style: TextStyle(
                                   fontSize: 30.0, color: Colors.black),
                             )
