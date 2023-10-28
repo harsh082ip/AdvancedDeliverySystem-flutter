@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:advanced_delivery_system/models/users.dart';
 import 'package:advanced_delivery_system/views/screen/Auth/otp_page.dart';
+import 'package:advanced_delivery_system/views/screen/costumer/costumer_home.dart';
 import 'package:advanced_delivery_system/views/screen/seller/seller_home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,7 +33,7 @@ class Auth extends GetxController {
               verificationCompleted: (PhoneAuthCredential credential) {
                 FirebaseAuth.instance
                     .signInWithCredential(credential)
-                    .then((value) => Get.offAll(CostumerHome(
+                    .then((value) => Get.offAll(SellerHome(
                           currentuser: FirebaseAuth.instance.currentUser!.uid,
                         )));
               },
@@ -118,14 +119,14 @@ class Auth extends GetxController {
             .set(user.toJson())
             .then((value) {
           log('SignIn Success');
-          Get.offAll(CostumerHome(
+          Get.offAll(SellerHome(
             currentuser: FirebaseAuth.instance.currentUser!.uid,
           ));
           log(userCredential.user!.uid + "yoyooyo");
         });
 
         log('SignIn Success');
-        Get.offAll(CostumerHome(
+        Get.offAll(SellerHome(
           currentuser: FirebaseAuth.instance.currentUser!.uid,
         ));
         log(userCredential.user!.uid + "yoyooyo");
@@ -168,9 +169,14 @@ class Auth extends GetxController {
       if (snapshot.docs.isNotEmpty) {
         log('docs not empty');
         final item = snapshot.docs[0].data() as Map<String, dynamic>;
-        Get.offAll(CostumerHome(
-          currentuser: item['uid'],
-        ));
+        if (item['role'] == 'seller') {
+          Get.offAll(SellerHome(currentuser: item['uid']));
+        }
+        if (item['role'] == 'costumer') {
+          Get.offAll(CostumerHome(
+            currentuser: item['uid'],
+          ));
+        }
       } else {
         Navigator.pop(context);
         log('User dosent exists');

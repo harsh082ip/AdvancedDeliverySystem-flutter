@@ -22,6 +22,9 @@ class Products {
       'image Url': imgUrl,
       'seller id': seller_uid,
       'product id': product_id,
+      'is item ordered': 'no',
+      'otp': 'none',
+      'assigned to': 'none'
     };
   }
 }

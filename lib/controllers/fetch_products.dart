@@ -12,4 +12,13 @@ class FetchProducts {
       return Stream.empty();
     }
   }
+
+  // for costumer
+  static Stream<QuerySnapshot> fetchProductsforCostumer() {
+    return FirebaseFirestore.instance
+        .collection('products')
+        .where('is item ordered', isEqualTo: 'no')
+        .where('otp', isEqualTo: 'none')
+        .snapshots();
+  }
 }
