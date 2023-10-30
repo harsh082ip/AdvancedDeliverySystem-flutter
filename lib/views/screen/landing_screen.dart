@@ -51,92 +51,153 @@ class _LandingScreenState extends State<LandingScreen> {
                     style: TextStyle(fontSize: 25.0, color: Colors.white),
                   ),
                 ),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.to(LoginScreen(
-                          role: 'seller',
-                        ));
+
+                Container(
+                  margin: EdgeInsets.only(top: 30.0),
+                  width: 200,
+                  height: 50,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 230, 170, 109)),
+                      onPressed: () {
+                        Get.to(() => LoginScreen(role: 'admin'));
                       },
-                      child: Container(
-                        margin: const EdgeInsets.all(15.0),
-                        decoration: const BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0)),
-                            color: Color.fromARGB(255, 197, 194, 194)),
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/admin.png',
-                              height: 150,
-                              width: 150,
-                            ),
-                            const Text(
-                              'seller',
-                              style: TextStyle(
-                                  fontSize: 30.0, color: Colors.black),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(LoginScreen(role: 'costumer'));
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.all(10.0).copyWith(left: 0),
-                        decoration: const BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0)),
-                            color: Color.fromARGB(255, 197, 194, 194)),
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/costumer.png',
-                              height: 150,
-                              width: 150,
-                            ),
-                            const Text(
-                              'Costumer',
-                              style: TextStyle(
-                                  fontSize: 30.0, color: Colors.black),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
+                      child: Text(
+                        'Admin',
+                        style: TextStyle(fontSize: 25),
+                      )),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(15.0).copyWith(top: 0),
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                          color: Color.fromARGB(255, 197, 194, 194)),
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/images/delivery.png',
-                            height: 150,
-                            width: 150,
-                          ),
-                          const Text(
-                            'Delivery Agent',
-                            style:
-                                TextStyle(fontSize: 30.0, color: Colors.black),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
+                Container(
+                  margin: EdgeInsets.only(top: 15.0),
+                  width: 200,
+                  height: 50,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 230, 170, 109)),
+                      onPressed: () {
+                        Get.to(() => LoginScreen(role: 'seller'));
+                      },
+                      child: Text(
+                        'Seller',
+                        style: TextStyle(fontSize: 25),
+                      )),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 15.0),
+                  width: 200,
+                  height: 50,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 230, 170, 109)),
+                      onPressed: () {
+                        Get.to(() => LoginScreen(role: 'costumer'));
+                      },
+                      child: Text(
+                        'Costumer',
+                        style: TextStyle(fontSize: 25),
+                      )),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 15.0),
+                  width: 200,
+                  height: 50,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 230, 170, 109)),
+                      onPressed: () {
+                        Get.to(() => LoginScreen(role: 'delivery'));
+                      },
+                      child: Text(
+                        'Delivery',
+                        style: TextStyle(fontSize: 25),
+                      )),
                 )
+                // Row(
+                //   children: [
+                // InkWell(
+                //   onTap: () {
+                //     Get.to(LoginScreen(
+                //       role: 'seller',
+                //     ));
+                //   },
+                //   child: Container(
+                //     margin: const EdgeInsets.all(15.0),
+                //     decoration: const BoxDecoration(
+                //         borderRadius:
+                //             BorderRadius.all(Radius.circular(15.0)),
+                //         color: Color.fromARGB(255, 197, 194, 194)),
+                //     width: MediaQuery.of(context).size.width * 0.45,
+                //     child: Column(
+                //       children: [
+                //         Image.asset(
+                //           'assets/images/admin.png',
+                //           height: 150,
+                //           width: 150,
+                //         ),
+                //         const Text(
+                //           'seller',
+                //           style: TextStyle(
+                //               fontSize: 30.0, color: Colors.black),
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                // InkWell(
+                //   onTap: () {
+                //     Get.to(LoginScreen(role: 'costumer'));
+                //   },
+                //   child: Container(
+                //     margin: const EdgeInsets.all(10.0).copyWith(left: 0),
+                //     decoration: const BoxDecoration(
+                //         borderRadius:
+                //             BorderRadius.all(Radius.circular(15.0)),
+                //         color: Color.fromARGB(255, 197, 194, 194)),
+                //     width: MediaQuery.of(context).size.width * 0.45,
+                //     child: Column(
+                //       children: [
+                //         Image.asset(
+                //           'assets/images/costumer.png',
+                //           height: 150,
+                //           width: 150,
+                //         ),
+                //         const Text(
+                //           'Costumer',
+                //           style: TextStyle(
+                //               fontSize: 30.0, color: Colors.black),
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // )
+                // ],
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Container(
+                //       margin: const EdgeInsets.all(15.0).copyWith(top: 0),
+                //       decoration: const BoxDecoration(
+                //           borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                //           color: Color.fromARGB(255, 197, 194, 194)),
+                //       width: MediaQuery.of(context).size.width * 0.6,
+                //       child: Column(
+                //         children: [
+                //           Image.asset(
+                //             'assets/images/delivery.png',
+                //             height: 150,
+                //             width: 150,
+                //           ),
+                //           const Text(
+                //             'Delivery Agent',
+                //             style:
+                //                 TextStyle(fontSize: 30.0, color: Colors.black),
+                //           )
+                //         ],
+                //       ),
+                //     ),
+                //   ],
+                // )
               ],
             )
           ],

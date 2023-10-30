@@ -23,8 +23,9 @@ class Products {
       'seller id': seller_uid,
       'product id': product_id,
       'is item ordered': 'no',
-      'otp': 'none',
-      'assigned to': 'none'
+      'otp': [],
+      'assigned to': 'none',
+      'ordered by': []
     };
   }
 }

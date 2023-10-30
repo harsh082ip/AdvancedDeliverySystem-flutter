@@ -9,12 +9,18 @@ class ProductTile extends StatefulWidget {
   String imgUrl;
   String prod_name;
   String prod_desc;
+  String cost_id;
+  String ordered_by;
+  String price;
   ProductTile(
       {super.key,
       required this.prod_id,
       required this.imgUrl,
       required this.prod_name,
-      required this.prod_desc});
+      required this.prod_desc,
+      required this.cost_id,
+      required this.ordered_by,
+      required this.price});
 
   @override
   State<ProductTile> createState() => _ProductTileState();
@@ -26,26 +32,26 @@ class _ProductTileState extends State<ProductTile> {
     return Container(
       decoration: BoxDecoration(
           color: Colors.grey[300], borderRadius: BorderRadius.circular(15.0)),
-      margin: EdgeInsets.symmetric(horizontal: 15.0).copyWith(top: 15.0),
+      margin: const EdgeInsets.symmetric(horizontal: 15.0).copyWith(top: 15.0),
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 10.0, right: 8.0, bottom: 12.0),
+            margin: const EdgeInsets.only(top: 10.0, right: 8.0, bottom: 12.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
+                const Text(
                   'Product ID: ',
                   style: TextStyle(color: Colors.green, fontSize: 20.0),
                 ),
                 Text(
                   widget.prod_id,
-                  style: TextStyle(color: Colors.red, fontSize: 20.0),
+                  style: const TextStyle(color: Colors.red, fontSize: 20.0),
                 )
               ],
             ),
           ),
-          Container(
+          SizedBox(
             height: 280,
             child: Image.network(fit: BoxFit.cover, widget.imgUrl),
           ),
@@ -55,7 +61,7 @@ class _ProductTileState extends State<ProductTile> {
               margin: const EdgeInsets.only(left: 10.0, top: 10.0),
               child: Text(
                 widget.prod_name,
-                style: TextStyle(color: Colors.black, fontSize: 25.0),
+                style: const TextStyle(color: Colors.black, fontSize: 25.0),
               ),
             ),
           ),
@@ -63,7 +69,20 @@ class _ProductTileState extends State<ProductTile> {
             margin: const EdgeInsets.only(left: 10.0, top: 12.0, right: 10.0),
             child: Text(
               widget.prod_desc,
-              style: TextStyle(fontSize: 15.0, color: Colors.black),
+              style: const TextStyle(fontSize: 15.0, color: Colors.black),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              margin: const EdgeInsets.only(left: 15.0, top: 12.0),
+              child: Text(
+                'Rs. ' + widget.price,
+                style: const TextStyle(
+                    fontSize: 25.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           Align(
@@ -71,43 +90,55 @@ class _ProductTileState extends State<ProductTile> {
             child: Container(
               width: 150,
               height: 40.0,
-              margin: EdgeInsets.only(top: 20.0, right: 15.0, bottom: 15.0),
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 173, 109, 45)),
-                  onPressed: () {
-                    Get.defaultDialog(
-                        title: 'Are you sure you want to buy this item',
-                        cancel: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromARGB(255, 173, 109, 45)),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text('Cancel')),
-                        confirm: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromARGB(255, 173, 109, 45)),
-                            onPressed: () {
-                              Get.defaultDialog(
-                                  title: 'Please wait...',
-                                  content: Center(
-                                    child: CircularProgressIndicator(
-                                      color: Color.fromARGB(255, 173, 109, 45),
-                                    ),
-                                  ));
-                              Orders.orderByCostumer(widget.prod_id,
-                                  ProductOTPGenerator.generateOTP(), context);
-                              // Navigator.pop(context);
-                            },
-                            child: Text('Confirm')));
-                  },
-                  child: Text(
-                    'Buy',
-                    style: TextStyle(fontSize: 25.0, letterSpacing: 2),
-                  )),
+              margin:
+                  const EdgeInsets.only(top: 20.0, right: 15.0, bottom: 15.0),
+              child: widget.ordered_by == 'yes'
+                  ? ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey),
+                      onPressed: () {},
+                      child: const Text('Item Ordered'))
+                  : ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 173, 109, 45)),
+                      onPressed: () {
+                        Get.defaultDialog(
+                            title: 'Are you sure you want to buy this item',
+                            cancel: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color.fromARGB(
+                                        255, 173, 109, 45)),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Cancel')),
+                            confirm: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color.fromARGB(
+                                        255, 173, 109, 45)),
+                                onPressed: () {
+                                  Get.defaultDialog(
+                                      title: 'Please wait...',
+                                      content: const Center(
+                                        child: CircularProgressIndicator(
+                                          color:
+                                              Color.fromARGB(255, 173, 109, 45),
+                                        ),
+                                      ));
+                                  Orders.orderByCostumer(
+                                      widget.prod_id,
+                                      ProductOTPGenerator.generateOTP(),
+                                      context,
+                                      widget.cost_id);
+                                  // Navigator.pop(context);
+                                },
+                                child: const Text('Confirm')));
+                      },
+                      child: const Text(
+                        'Buy',
+                        style: TextStyle(fontSize: 25.0, letterSpacing: 2),
+                      )),
             ),
           )
         ],
